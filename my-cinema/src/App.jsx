@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Кінотеатр</h1>
+      <h1 id="logo">Кінотеатр</h1>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <MovieList movies={filteredMovies} />
     </div>
