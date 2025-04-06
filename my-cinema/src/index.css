@@ -1,68 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Orbitron:wght@500&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --color-bg: #000000;
+  --color-primary: #282A3A;
+  --color-secondary: #ffffff;
+  --color-accent: #735F32;
+  --color-light: #C69749;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  font-family: var(--font-body);
+  color: var(--color-light);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--color-secondary);
+}
+
+#logo{
+  font-size: 3rem;
+}
+
+.app {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.movie-list {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.movie-card {
+  background-color: var(--color-primary);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex: 1 1 calc(33.333% - 1rem); /* 3 на ряд по замовчуванню */
+  max-width: 450px;
+  
+  box-sizing: border-box;
+  
 }
 
-button {
+.movie-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 14px rgba(255, 255, 255, 0.15);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 65vh;
+  object-fit: cover;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  margin-bottom: 0.5rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+
+input[type="text"] {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  background-color: var(--color-secondary);
+  color: var(--color-bg);
+  box-sizing: border-box;
+}
+
+input[type="text"]::placeholder {
+  color: var(--color-bg);
+}
+
+@media (max-width: 1024px) {
+  .movie-card {
+    flex: 1 1 calc(50% - 1rem); /* 2 картки в ряд */
   }
-  a:hover {
-    color: #747bff;
+
+  .movie-card img {
+    height: 50vh;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@media (max-width: 600px) {
+  .movie-card {
+    flex: 1 1 100%; /* 1 картка на ряд */
+  }
+
+  .movie-card img {
+    height: 60vh;
   }
 }
