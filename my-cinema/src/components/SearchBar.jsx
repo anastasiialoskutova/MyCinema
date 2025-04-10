@@ -3,7 +3,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => (
       type="text"
       placeholder="Пошук фільму..."
       value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
+      onChange={(e) => setSearchTerm(e.target.value)} //e.target - це елемент, який викликав подію (input)
     />
   );
   
