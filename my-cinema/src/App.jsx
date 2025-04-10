@@ -1,21 +1,18 @@
-import { useState } from 'react';
-import MovieList from './components/MovieList';
-import SearchBar from './components/SearchBar';
-import moviesData from './data/movies'; // Імпорт даних фільмів з файлу movies.js
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home'; // Головна сторінка
+import Booking from './pages/Booking'; // Сторінка бронювання
+import './App.css'; // Стилі
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredMovies = moviesData.filter(movie => //filteredMovies - новий масив з відфільтрованими фільмами
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
-    <div className="app">
-      <h1 id="logo">Кінотеатр</h1>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <MovieList movies={filteredMovies} />
-    </div>
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/booking/:id" element={<Booking />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
