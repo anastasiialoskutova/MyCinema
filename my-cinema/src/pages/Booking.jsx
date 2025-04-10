@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import CinemaHall from './CinemaHall';
+import CinemaHall from "../components/CinemaHall";
 
 const Booking = () => {
   const { id } = useParams(); // Отримуємо id фільму з параметрів URL
