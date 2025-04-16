@@ -140,6 +140,56 @@ input[type="text"]::placeholder {
   background-color: var(--color-light);
 }
 
+.booking-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--color-primary);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box; /* Включає padding і border у розмір елемента */
+}
+
+/* Стилі для повідомлення про помилки */
+.booking-form p {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Стилі для кнопки */
+.booking-form button {
+  width: 100%;
+  padding: 14px;
+  background-color: #5c548a;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.booking-form button:hover {
+  background-color: #4a4374;
+}
+
+/* Стилі для інпутів, коли вони отримують фокус */
+.booking-form input:focus {
+  border-color: #5c548a;
+  outline: none;
+}
+
 @media (max-width: 1024px) {
   .movie-card {
     flex: 1 1 calc(50% - 1rem); /* 2 картки в ряд */
@@ -152,7 +202,9 @@ input[type="text"]::placeholder {
     flex: 1 1 100%; /* 1 картка на ряд */
   }
 
-
+  .booking-form {
+    padding: 1rem;
+  }
   .seats-grid {
     grid-template-columns: repeat(3, 50px);
   }

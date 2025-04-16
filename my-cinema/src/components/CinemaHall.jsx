@@ -63,7 +63,7 @@ const CinemaHall = ({ movieId }) => {
         <>
           <p>Вибрані місця: {selectedSeats.join(", ")}</p>
           {!showForm ? (
-            <button onClick={() => setShowForm(true)}>Забронювати</button>
+            <button onClick={() => setShowForm(true)} className="book-button">Забронювати</button>
           ) : (
             <BookingForm
               movieId={movieId}
