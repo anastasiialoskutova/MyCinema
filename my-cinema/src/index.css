@@ -27,7 +27,7 @@ h1, h2, h3 {
 #logo{
   font-size: 3rem;
   font-family: var(--font-body);
-  font-weight: bold; /* Товстий шрифт */
+  font-weight: bold; 
   letter-spacing: 4px; /* Відстань між літерами */
   color: var(--color-light);
 }
@@ -53,7 +53,7 @@ h1, h2, h3 {
   box-shadow: 0 4px 10px rgba(184, 184, 184, 0.3); /* [горизонтальний зсув] [вертикальний зсув] [розмитість] [розмір тіні] [колір] */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   flex: 1 1 calc(33.333% - 1rem); /* 3 на ряд по замовчуванню */
-  max-width: 450px;
+  max-width: 300px;
   box-sizing: border-box;
 }
 
@@ -62,7 +62,6 @@ h1, h2, h3 {
   box-shadow: 0 6px 14px var(--color-accent); /* Використовуємо акцентний колір для тіні */
 }
 
-
 .movie-card img {
   width: 100%;
   height: 50vh;
@@ -70,7 +69,6 @@ h1, h2, h3 {
   border-radius: 8px;
   margin-bottom: 0.5rem;
 }
-
 
 input[type="text"] {
   padding: 0.5rem 1rem;
@@ -89,14 +87,64 @@ input[type="text"]::placeholder {
   color: var(--color-bg);
 }
 
+.book-button {
+  background-color: var(--color-accent); 
+  color: white;
+  border: none; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.book-button:hover {
+  background-color: var(--color-light); 
+  transform: scale(1.05); 
+}
+
+.book-button:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px var(--color-light); 
+}
+
+.book-button:active {
+  background-color: var(--color-primary); 
+  transform: scale(0.98); 
+}
+
+.cinema-hall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 50px);
+  gap: 10px;
+}
+
+.seat {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.seat.booked {
+  background-color: var(--color-accent)
+}
+
+.seat.available {
+  background-color: var(--color-light);
+}
+
 @media (max-width: 1024px) {
   .movie-card {
     flex: 1 1 calc(50% - 1rem); /* 2 картки в ряд */
   }
 
-  .movie-card img {
-    height: 60vh;
-  }
 }
 
 @media (max-width: 600px) {
@@ -104,7 +152,8 @@ input[type="text"]::placeholder {
     flex: 1 1 100%; /* 1 картка на ряд */
   }
 
-  .movie-card img {
-    height: 50vh;
+
+  .seats-grid {
+    grid-template-columns: repeat(3, 50px);
   }
 }
