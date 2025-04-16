@@ -1,33 +1,78 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import BookingForm from "./BookingForm";
+import BookingService from "../services/BookingService";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const CinemaHall = ({ movieId }) => {
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    const fetchBookedSeats = async () => {
+      const bookings = await BookingService.getBookings(movieId);
+      const allBookedSeats = bookings.flatMap((booking) => booking.seats);
+      setBookedSeats(allBookedSeats);
+    };
+
+    fetchBookedSeats();
+  }, [movieId]);
 
   const handleSeatClick = (seatNumber) => {
+    if (bookedSeats.includes(seatNumber)) return;
+
     setSelectedSeats((prevSeats) =>
       prevSeats.includes(seatNumber)
-        ? prevSeats.filter((seat) => seat !== seatNumber) // Якщо вже вибрано, зняти
-        : [...prevSeats, seatNumber] // Якщо не вибрано, додати
+        ? prevSeats.filter((seat) => seat !== seatNumber)
+        : [...prevSeats, seatNumber]
     );
   };
 
-  const seats = Array.from({ length: 30 }, (_, index) => index + 1); // Створюємо сітку з 30 місць
+  const handleBookingSuccess = () => {
+    setSelectedSeats([]);
+    setShowForm(false);
+    const updatedSeats = BookingService.getBookings(movieId).flatMap(
+      (booking) => booking.seats
+    );
+    setBookedSeats(updatedSeats);
+  };
 
   return (
     <div className="cinema-hall">
       <h2>Кінозал для фільму {movieId}</h2>
       <div className="seats-grid">
-        {seats.map((seat) => (
+        {Array.from({ length: 30 }, (_, index) => index + 1).map((seat) => (
           <button
             key={seat}
             onClick={() => handleSeatClick(seat)}
-            className={selectedSeats.includes(seat) ? 'seat booked' : 'seat available'}
+            className={
+              bookedSeats.includes(seat)
+                ? "seat booked"
+                : selectedSeats.includes(seat)
+                ? "seat selected"
+                : "seat available"
+            }
+            disabled={bookedSeats.includes(seat)}
           >
             {seat}
           </button>
         ))}
       </div>
-      <p>Вибрані місця: {selectedSeats.join(', ')}</p>
+      {selectedSeats.length > 0 && (
+        <>
+          <p>Вибрані місця: {selectedSeats.join(", ")}</p>
+          {!showForm ? (
+            <button onClick={() => setShowForm(true)}>Забронювати</button>
+          ) : (
+            <BookingForm
+              movieId={movieId}
+              selectedSeats={selectedSeats}
+              onSuccess={handleBookingSuccess}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };
