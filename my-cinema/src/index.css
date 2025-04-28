@@ -148,6 +148,7 @@ input[type="text"]::placeholder {
   background-color: var(--color-primary);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; 
 }
 
 .booking-form input {

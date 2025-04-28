@@ -21,6 +21,12 @@ const BookingForm = ({ movieId, selectedSeats, onSuccess }) => {
       return;
     }
 
+    // Перевірка для номера телефону (формат +380XXXXXXXXX або 0XXXXXXXXX)
+    if (!/^(?:\+380|0)\d{9}$/.test(phone)) {
+      setError("Невірний формат номера телефону!");
+      return;
+    }
+
     const booking = {
       name,
       phone,
@@ -41,36 +47,35 @@ const BookingForm = ({ movieId, selectedSeats, onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit} className="booking-form">
-  {error && <p>{error}</p>}
-  <input
-    type="text"
-    value={name}
-    onChange={(e) => setName(e.target.value)}
-    placeholder="Ім'я"
-    required
-    className="form-input"
-  />
-  <input
-    type="tel"
-    value={phone}
-    onChange={(e) => setPhone(e.target.value)}
-    placeholder="Телефон"
-    required
-    className="form-input"
-  />
-  <input
-    type="email"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    placeholder="Емейл"
-    required
-    className="form-input"
-  />
-  <button type="submit" className="form-button">
-    Підтвердити бронювання
-  </button>
-</form>
-
+      {error && <p>{error}</p>}
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Ім'я"
+        required
+        className="form-input"
+      />
+      <input
+        type="tel"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        placeholder="Телефон"
+        required
+        className="form-input"
+      />
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Емейл"
+        required
+        className="form-input"
+      />
+      <button type="submit" className="form-button">
+        Підтвердити бронювання
+      </button>
+    </form>
   );
 };
 
